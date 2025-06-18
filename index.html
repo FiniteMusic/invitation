@@ -1,0 +1,738 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>It's My Birthday</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@300;400;500;600;700&family=Source+Sans+Pro:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        @font-face {
+            font-family: 'Frunchy';
+            src: url('Frunchy.ttf') format('truetype');
+            font-display: swap;
+        }
+
+        :root {
+            --primary-gold: #d4a574;
+            --secondary-gold: #c09660;
+            --dark-gold: #b8956a;
+            --cream: #f8f6f0;
+            --warm-white: #fefcf7;
+            --text-dark: #3c3426;
+            --text-medium: #5a4a3a;
+            --text-light: #8a7a6a;
+            --shadow-soft: 0 10px 40px rgba(0, 0, 0, 0.1);
+            --shadow-medium: 0 15px 50px rgba(0, 0, 0, 0.15);
+            --shadow-strong: 0 20px 60px rgba(0, 0, 0, 0.2);
+        }
+
+        body {
+            font-family: 'Source Sans Pro', 'Georgia', serif;
+            background: linear-gradient(135deg, #f8f6f0 0%, #f0ede4 50%, #e8e0d0 100%);
+            color: var(--text-medium);
+            min-height: 100vh;
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* Elegant floating particles */
+        .floating-elements {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+            overflow: hidden;
+        }
+
+        .floating-particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: var(--primary-gold);
+            border-radius: 50%;
+            opacity: 0.3;
+            animation: float 15s infinite linear;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.3;
+            }
+            90% {
+                opacity: 0.3;
+            }
+            100% {
+                transform: translateY(-100px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            position: relative;
+            z-index: 10;
+        }
+
+        /* Elegant decorative corners */
+        .corner-decoration {
+            position: fixed;
+            width: 200px;
+            height: 200px;
+            opacity: 0.1;
+            z-index: 2;
+        }
+
+        .corner-decoration.top-left {
+            top: 20px;
+            left: 20px;
+            background: radial-gradient(circle, var(--primary-gold) 2px, transparent 2px);
+            background-size: 20px 20px;
+        }
+
+        .corner-decoration.bottom-right {
+            bottom: 20px;
+            right: 20px;
+            background: radial-gradient(circle, var(--secondary-gold) 2px, transparent 2px);
+            background-size: 20px 20px;
+        }
+
+        /* Main Content */
+        .content {
+            background: url('flor.jpg') no-repeat center center/cover fixed;
+            position: relative;
+            border-radius: 30px;
+            overflow: hidden;
+            box-shadow: var(--shadow-strong);
+        }
+
+        .content::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(
+                135deg,
+                rgba(248, 246, 240, 0.45) 0%,
+                rgba(240, 235, 225, 0.4) 50%,
+                rgba(245, 240, 230, 0.5) 100%
+            );
+            backdrop-filter: blur(1px) saturate(1);
+            z-index: 1;
+        }
+
+        .content-inner {
+            position: relative;
+            z-index: 2;
+            padding: 60px 40px;
+            text-align: center;
+        }
+
+        /* Hero Section */
+        .hero-section {
+            margin-bottom: 80px;
+        }
+
+        .decorative-line {
+            width: 100px;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--primary-gold), transparent);
+            margin: 30px auto;
+            position: relative;
+        }
+
+        .decorative-line::before,
+        .decorative-line::after {
+            content: '';
+            position: absolute;
+            top: -3px;
+            width: 8px;
+            height: 8px;
+            background: var(--primary-gold);
+            border-radius: 50%;
+        }
+
+        .decorative-line::before {
+            left: -4px;
+        }
+
+        .decorative-line::after {
+            right: -4px;
+        }
+
+        .main-title {
+            font-family: 'Frunchy', 'Playfair Display', serif;
+            font-size: clamp(3.5rem, 8vw, 6rem);
+            font-weight: 300;
+            letter-spacing: 12px;
+            margin-bottom: 20px;
+            line-height: 1.1;
+            color: var(--text-dark);
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+            animation: titleGlow 3s ease-in-out infinite alternate;
+        }
+
+        @keyframes titleGlow {
+            0% {
+                text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+            }
+            100% {
+                text-shadow: 2px 2px 8px rgba(212, 165, 116, 0.3);
+            }
+        }
+
+        .main-title .highlight {
+            color: var(--primary-gold);
+            font-weight: 400;
+            display: block;
+            margin: 15px 0;
+            background: linear-gradient(45deg, var(--primary-gold), var(--secondary-gold));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .subtitle {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(1.2rem, 3vw, 1.8rem);
+            color: var(--text-dark);
+            font-style: italic;
+            margin-top: 30px;
+            opacity: 10;
+        }
+
+        .decorative-flourish {
+            font-size: 24px;
+            color: var(--primary-gold);
+            margin: 40px 0;
+            letter-spacing: 15px;
+            opacity: 0.7;
+        }
+
+        /* Sections */
+        .section {
+            background: rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(10px);
+            border-radius: 25px;
+            padding: 50px 40px;
+            margin: 40px 0;
+            border: 1px solid rgba(255, 255, 255, 0.8);
+            box-shadow: var(--shadow-soft);
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .section::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(45deg, var(--primary-gold), transparent, var(--secondary-gold));
+            border-radius: 27px;
+            z-index: -1;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .section:hover::before {
+            opacity: 0.3;
+        }
+
+        .section:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-medium);
+        }
+
+        .section h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(1.8rem, 4vw, 2.5rem);
+            color: var(--text-dark);
+            margin-bottom: 30px;
+            font-weight: 500;
+            position: relative;
+        }
+
+        .section h2::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary-gold), var(--secondary-gold));
+            margin: 15px auto;
+            border-radius: 2px;
+        }
+
+        .section p {
+            font-size: clamp(1.1rem, 2.5vw, 1.4rem);
+            line-height: 1.8;
+            margin-bottom: 20px;
+            color: var(--text-medium);
+        }
+
+        /* Date and Time Cards */
+        .date-time {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .date-item {
+            background: linear-gradient(135deg, 
+                rgba(212, 165, 116, 0.15), 
+                rgba(212, 165, 116, 0.08)
+            );
+            padding: 35px 25px;
+            border-radius: 20px;
+            border: 2px solid rgba(212, 165, 116, 0.2);
+            position: relative;
+            transition: all 0.3s ease;
+            overflow: hidden;
+        }
+
+        .date-item::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transform: rotate(45deg);
+            transition: all 0.5s ease;
+            opacity: 0;
+        }
+
+        .date-item:hover::before {
+            opacity: 1;
+            animation: shimmer 1.5s ease-in-out;
+        }
+
+        @keyframes shimmer {
+            0% {
+                transform: translateX(-100%) translateY(-100%) rotate(45deg);
+            }
+            100% {
+                transform: translateX(100%) translateY(100%) rotate(45deg);
+            }
+        }
+
+        .date-item:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-medium);
+        }
+
+        .date-item i {
+            color: var(--primary-gold);
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            display: block;
+            filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.1));
+        }
+
+        .date-item h3 {
+            color: var(--text-dark);
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+            font-weight: 600;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .date-item p {
+            color: var(--text-medium);
+            font-size: 1.1rem;
+            margin: 0;
+            font-weight: 400;
+        }
+
+        /* Location */
+        .location-info {
+            background: linear-gradient(135deg, 
+                rgba(212, 165, 116, 0.2), 
+                rgba(212, 165, 116, 0.1)
+            );
+            padding: 35px;
+            border-radius: 20px;
+            margin-top: 30px;
+            border: 2px solid rgba(212, 165, 116, 0.3);
+            position: relative;
+        }
+
+        .location-info i {
+            color: var(--primary-gold);
+            font-size: 1.8rem;
+            margin-right: 15px;
+            vertical-align: middle;
+        }
+
+        /* CTA Button */
+        .cta-button {
+            background: linear-gradient(135deg, var(--primary-gold), var(--secondary-gold));
+            color: white;
+            padding: 18px 45px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin: 40px 0;
+            text-decoration: none;
+            display: inline-block;
+            box-shadow: 0 8px 25px rgba(212, 165, 116, 0.4);
+            position: relative;
+            overflow: hidden;
+            letter-spacing: 1px;
+        }
+
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .cta-button:hover::before {
+            left: 100%;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(212, 165, 116, 0.6);
+        }
+
+        .cta-button i {
+            margin-right: 10px;
+        }
+
+        /* Gift Note */
+        .gift-note {
+            background: linear-gradient(135deg, 
+                rgba(212, 165, 116, 0.15), 
+                rgba(212, 165, 116, 0.08)
+            );
+            border-left: 5px solid var(--primary-gold);
+            padding: 30px;
+            margin: 40px 0;
+            border-radius: 0 20px 20px 0;
+            font-style: italic;
+            position: relative;
+        }
+
+        .gift-note::before {
+            content: '"';
+            position: absolute;
+            top: 10px;
+            left: 15px;
+            font-size: 4rem;
+            color: var(--primary-gold);
+            opacity: 0.3;
+            font-family: 'Playfair Display', serif;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px 15px;
+            }
+
+            .content-inner {
+                padding: 40px 25px;
+            }
+
+            .main-title {
+                letter-spacing: 6px;
+            }
+
+            .section {
+                padding: 35px 25px;
+                margin: 25px 0;
+            }
+
+            .date-time {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .decorative-flourish {
+                letter-spacing: 8px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .main-title {
+                letter-spacing: 3px;
+            }
+
+            .decorative-flourish {
+                letter-spacing: 5px;
+            }
+
+            .section {
+                padding: 25px 20px;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInScale {
+            from {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .hero-section {
+            animation: fadeInScale 1s ease-out;
+        }
+
+        .section {
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        .section:nth-child(2) { animation-delay: 0.1s; }
+        .section:nth-child(3) { animation-delay: 0.2s; }
+        .section:nth-child(4) { animation-delay: 0.3s; }
+        .section:nth-child(5) { animation-delay: 0.4s; }
+
+        /* Final quote styling */
+        .final-quote {
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            color: var(--text-light);
+            margin-top: 50px;
+            font-size: clamp(1.1rem, 2.5vw, 1.4rem);
+            position: relative;
+            padding: 0 30px;
+        }
+
+        .final-quote::before,
+        .final-quote::after {
+            content: '"';
+            font-size: 2rem;
+            color: var(--primary-dark-gold);
+            opacity: 1;
+            position: absolute;
+            top: -10px;
+        }
+
+        .final-quote::before {
+            left: 0;
+        }
+
+        .final-quote::after {
+            right: 0;
+        }
+    </style>
+</head>
+<body>
+    <!-- Floating particles -->
+    <div class="floating-elements">
+        <div class="floating-particle" style="left: 10%; animation-delay: 0s;"></div>
+        <div class="floating-particle" style="left: 20%; animation-delay: 2s;"></div>
+        <div class="floating-particle" style="left: 30%; animation-delay: 4s;"></div>
+        <div class="floating-particle" style="left: 40%; animation-delay: 6s;"></div>
+        <div class="floating-particle" style="left: 50%; animation-delay: 8s;"></div>
+        <div class="floating-particle" style="left: 60%; animation-delay: 10s;"></div>
+        <div class="floating-particle" style="left: 70%; animation-delay: 12s;"></div>
+        <div class="floating-particle" style="left: 80%; animation-delay: 14s;"></div>
+        <div class="floating-particle" style="left: 90%; animation-delay: 16s;"></div>
+    </div>
+
+    <!-- Corner decorations -->
+    <div class="corner-decoration top-left"></div>
+    <div class="corner-decoration bottom-right"></div>
+
+    <div class="container">
+        <div class="content">
+            <div class="content-inner">
+                <!-- Hero Section -->
+                <div class="hero-section">
+                    <div class="decorative-line"></div>
+                    <h1 class="main-title">
+                        ES<br>
+                        <span class="highlight">MI</span>
+                        CUMPLEAÑOS
+                    </h1>
+                    <div class="subtitle"><strong> Pero se van temprano a sus casas</strong></div>
+                    <div class="decorative-flourish">❦ ❦ ❦ ❦ ❦</div>
+                </div>
+                
+                <div class="section">
+                    <h2>¡Estás Cordialmente Invitado!</h2>
+                    <p>Me complace invitarte a celebrar un año más de vida en una velada especial. Será una celebración llena de alegría, risas y momentos inolvidables junto a las personas más queridas.</p>
+                    <p>Tu presencia haría que este día sea verdaderamente mágico. ¡Ven y celebremos juntos este momento tan especial!</p>
+                </div>
+
+                <div class="section">
+                    <h2>Detalles del Evento</h2>
+                    <div class="date-time">
+                        <div class="date-item">
+                            <i class="fas fa-calendar-alt"></i>
+                            <h3>Fecha</h3>
+                            <p>Sábado<br>28 de Junio</p>
+                        </div>
+                        <div class="date-item">
+                            <i class="fas fa-clock"></i>
+                            <h3>Horario</h3>
+                            <p>7:00 PM<br>en adelante</p>
+                        </div>
+                        <div class="date-item">
+                            <i class="fas fa-birthday-cake"></i>
+                            <h3>Celebración</h3>
+                            <p>Cumpleaños<br>Especial</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <h2>Ubicación del Evento</h2>
+                    <div class="location-info">
+                        <p><i class="fas fa-map-marker-alt"></i> <strong>Dirección:</strong></p>
+                        <p>Calle Sauce 1-50, Morelos 3ra Secc,<br>
+                        54935 San Pablo de las Salinas, Méx.</p>
+                    </div>
+                    
+                    <a href="https://maps.app.goo.gl/X8CudtWULFS5hc396" target="_blank" class="cta-button">
+                        <i class="fas fa-map"></i> Ver Ubicación en Maps
+                    </a>
+                </div>
+
+                <div class="section">
+                    <h2>Información Importante</h2>
+                    <div class="gift-note">
+                        <i class="fas fa-gift" style="color: var(--primary-gold); margin-right: 15px;"></i>
+                        <strong>Código de vestimenta:</strong> Casual<br><br>
+                        <strong>Sobre los regalos:</strong> Tu presencia es el mejor regalo, pero si deseas traer algo, será muy apreciado.<br><br>
+                        <strong>Nota especial:</strong> La celebración será íntima y acogedora.
+                    </div>
+                </div>
+
+                <div class="decorative-line"></div>
+                
+                <p class="final-quote">
+                    <strong>Los mejores momentos se viven con las mejores personas</strong>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Enhanced scroll animations
+            const sections = document.querySelectorAll('.section');
+            
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -80px 0px'
+            };
+
+            const observer = new IntersectionObserver(function(entries) {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.transform = 'translateY(0)';
+                        entry.target.style.opacity = '1';
+                    }
+                });
+            }, observerOptions);
+
+            sections.forEach(section => {
+                observer.observe(section);
+            });
+
+            // Enhanced button interactions
+            const buttons = document.querySelectorAll('.cta-button');
+            buttons.forEach(button => {
+                button.addEventListener('click', function(e) {
+                    const ripple = document.createElement('span');
+                    const rect = this.getBoundingClientRect();
+                    const size = Math.max(rect.width, rect.height);
+                    const x = e.clientX - rect.left - size / 2;
+                    const y = e.clientY - rect.top - size / 2;
+                    
+                    ripple.style.cssText = `
+                        position: absolute;
+                        border-radius: 50%;
+                        background: rgba(255,255,255,0.4);
+                        transform: scale(0);
+                        animation: ripple 0.8s ease-out;
+                        left: ${x}px;
+                        top: ${y}px;
+                        width: ${size}px;
+                        height: ${size}px;
+                        pointer-events: none;
+                    `;
+                    
+                    this.appendChild(ripple);
+                    setTimeout(() => ripple.remove(), 800);
+                });
+            });
+
+            // Parallax effect for floating particles
+            window.addEventListener('scroll', function() {
+                const scrolled = window.pageYOffset;
+                const particles = document.querySelectorAll('.floating-particle');
+                
+                particles.forEach((particle, index) => {
+                    const speed = 0.5 + (index * 0.1);
+                    particle.style.transform = `translateY(${scrolled * speed}px)`;
+                });
+            });
+        });
+
+        // Add enhanced ripple animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes ripple {
+                to {
+                    transform: scale(2.5);
+                    opacity: 0;
+                }
+            }
+            .cta-button {
+                position: relative;
+                overflow: hidden;
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>
